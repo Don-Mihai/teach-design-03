@@ -8,3 +8,13 @@ export const createAlert = text => {
     document.body.append(div);
     return div;
 };
+
+export const summArrElem = arr => {
+    let result = 0;
+
+    for (let i = 0; i < arr.length; ++i) {
+        result = result + arr[i];
+    }
+
+    console.log(result);
+};

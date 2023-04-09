@@ -1,54 +1,43 @@
 // 'usestrict'
-import { createAlert } from './utils.js';
-
 const button = document.getElementById('more');
 
-// button.onclick = () => {
-//     const div = createAlert();
-
-//     // установка таймера, для удаления алерта
-//     // первый таймер
-//     let id = setTimeout(() => div.remove(), 3000);
-
-//     // очистка
-//     div.onmouseover = () => {
-//         // clearTimeout(id)
-//         div.classList.remove('hideModal')
-//     };
-
-//     // повторный вызов, другого таймера с другим айдишником
-//     div.onmouseout = () => {
-//         id =  setTimeout(() => div.remove(), 3000)
-//         div.classList.add('hideModal')
-//     };
-// };
-
-function showNotification(message, type = 'info', duration = 3000, onClose = null) {
+function showNotification(message, type = 'info', duration = 5000) {
     const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
+    notification.className = `notification hideModal notification__${type}`;
     notification.innerHTML = `<div class="notification-message">${message}</div>
-                              <div class="notification-close">&times;</div>`;
+                              <div class="notification__close">&times;</div>`;
   
     const body = document.querySelector('body');
     body.appendChild(notification);
   
+    let id;
+    // удаляет всплывашку
     const closeNotification = () => {
-      notification.classList.add('hide');
-      if (onClose) onClose();
-      setTimeout(() => {
         body.removeChild(notification);
-      }, 500);
     };
   
-    const closeBtn = notification.querySelector('.notification-close');
+    const closeBtn = notification.querySelector('.notification__close');
     closeBtn.addEventListener('click', closeNotification);
   
-    setTimeout(() => {
-      notification.classList.add('show');
-      setTimeout(closeNotification, duration);
-    }, 100);
+    notification.classList.add('show');
+    id = setTimeout(closeNotification, duration);
+
+
+    notification.onmouseover = () => {
+        clearTimeout(id);
+        notification.classList.remove('hideModal');
+    };
+
+    notification.onmouseout = () => {
+        notification.classList.add('show');
+        id = setTimeout(closeNotification, duration);
+
+        notification.classList.add('hideModal');
+    };
   }
 
-  showNotification('Успешно сохранено!', 'success', 5000, () => {
-    console.log('Уведомление закрыто');
-  });
+
+
+  button.onclick = () => {
+    showNotification('Успешно сохранено!')
+  }
