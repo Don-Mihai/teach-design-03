@@ -1,3 +1,6 @@
+import {showNotification} from './show.js'
+
+
 const inputName = document.querySelector('.form__name')
 const inputEmail = document.querySelector('.form__email')
 const inputMessage = document.querySelector('.form__message')
@@ -22,7 +25,10 @@ const button = document.querySelector('.form__button')
 //     console.log(obj)
 // }
 
-button.addEventListener('click', () => {
+button.addEventListener('click', (event) => {
+
+    event.preventDefault()
+
     const obj = {
         name: inputName.value,
         email: inputEmail.value,
@@ -31,11 +37,17 @@ button.addEventListener('click', () => {
 
     if(!obj.name) {
         // вызов уведомления
+        inputName.style.border = '2px solid red'
+
+        let span = document.createElement('span');
+        span.classList.add('error-text')
+        span.innerHTML = 'Введите имя'
         
+        inputName.after(span)
     }
 
-
-
-
+    if(!obj.email) {
+        
+    }
 
 })

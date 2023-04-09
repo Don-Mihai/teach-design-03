@@ -1,7 +1,9 @@
 // 'usestrict'
+import { createAlert, summArrElem } from './utils.js';
+
 const button = document.getElementById('more');
 
-function showNotification(message, type = 'info', duration = 5000) {
+export function showNotification(message, type = 'info', duration = 5000) {
     const notification = document.createElement('div');
     notification.className = `notification hideModal notification__${type}`;
     notification.innerHTML = `<div class="notification-message">${message}</div>

@@ -1013,6 +1013,14 @@ a {
     color: #FFFFFF;
 }
 
+.error-text {
+    position: absolute;
+    bottom: -16px;
+    left: 0;
+    font-size: 12px;
+    color: red;
+}
+
 .form {
     width: 705px;
 
@@ -1028,6 +1036,10 @@ a {
         &::placeholder {
             color: #999;
         }
+    }
+
+    &__label {
+        width: 100%;
     }
 
     &__message {
